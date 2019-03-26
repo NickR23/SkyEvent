@@ -5,7 +5,7 @@ Application that displays an image of the night sky based on longitude, latitude
 Currently runs exclusively from command line. 
 
 ## Dependencies
-Uses matplotlib, requests, and mechanize.
+Uses Images, requests, and mechanize.
 
 ## Usage
 Arguments: {lat, long}
