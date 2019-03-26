@@ -3,6 +3,7 @@ import mechanize as mech
 import requests
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+from PIL import Image
 
 print("ARGS:",str(sys.argv))
 br = mech.Browser()
@@ -38,6 +39,5 @@ img.write(requests.get(br.geturl()).content)
 img.close()
 
 #display image
-img = mpimg.imread('sky.jpg')
-imgplot = plt.imshow(img)
-plt.show()
+img = Image.open('sky.jpg')
+img.show()
