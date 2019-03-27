@@ -5,11 +5,11 @@ import requests
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from PIL import Image
+
 spinner = Spinner() #Make spinner
 spinner.start()
-sys.stdout.flush()
+
 argc = len(sys.argv)
-print(argc,"ARGS:",str(sys.argv))
 br = mech.Browser()
 br.set_handle_robots(False)   # ignore robots
 res = br.open('http://www.fourmilab.ch/cgi-bin/Yoursky')
@@ -18,6 +18,7 @@ link = br.find_link("Customise")
 br.follow_link(link)
 #print("URL:",br.geturl())
 spinner.stop()
+print(argc,"ARGS:",str(sys.argv))
 
 #Selects the form we want
 br.form = list(br.forms())[0]
@@ -52,8 +53,8 @@ control.value = lat
 control = br.form.find_control("lon")
 control.value = lon
 
-for c in br.form.controls:
-  print(c)
+#for c in br.form.controls:
+  #print(c)
 #submit form
 res = br.submit()
 
@@ -61,6 +62,12 @@ res = br.submit()
 img = open('sky.jpg','wb')
 img.write(requests.get(br.geturl()).content)
 img.close()
+
+#Show cool moon dude
+f = open('assets/title.txt', 'r')
+moon_dude = f.read()
+print(moon_dude)
+f.close()
 
 #display image
 img = Image.open('sky.jpg')
