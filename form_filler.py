@@ -1,6 +1,17 @@
 from mechanize import Browser
 import pickler
 
+def string_or_bool( string, control):
+  if (control.type == 'text'):
+    print(string)
+    return str(string)
+  pos = ['true', 'True', 'y', 'yes']
+  neg = ['false', 'False', 'n', 'no']
+  if (string in pos) or (string in neg):
+    return string in pos
+  else:
+    return string
+
 def fill_form( br, argv ):
   #Remove first irrelevant arg
   argv.pop(0)
@@ -12,19 +23,20 @@ def fill_form( br, argv ):
   #Selects the form we want
   br.form = list(br.forms())[0]
   
-  #for control in br.form.controls:
-    #print("name=%s, type=%s" % (control.name, control.type))
+  for control in br.form.controls:
+    print("name=%s, type=%s" % (control.name, control.type))
     
 #   Set dynimg so we just get an image instd of a map
   control = br.form.find_control("dynimg")
   control.items[0].selected=True
-  
+  is_text = False;
+  control
   for index, arg in enumerate( argv ):
     if arg in flags:
-      name = flags[ arg ]
+      name = flags[ arg ][0]
       control = br.form.find_control( name )
     else:  
-      control.value = [argv[index]]
+      control.value = string_or_bool([argv[index]], control)
 
   
   
