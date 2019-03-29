@@ -21,7 +21,7 @@ dict = {
   '-c':['coords', 1], #On/Off ecliptic and equator
   '-m':['moonp', 1], #On/Off moon and planets
   '-d':['deep', 2], #On/Off deep sky objects followed by magnitude value
-  '-co':['conto', 1], #On/Off constellation outlines
+  '-o':['consto', 1], #On/Off constellation outlines
   '-cn':['constn', 1], #OnOff constellation names
   '-ca':['consta', 1], #On/Off align names with horizon
   '-cs':['consts', 1], #On/Off abbreviate constellation names

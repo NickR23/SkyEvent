@@ -2,11 +2,14 @@ from mechanize import Browser
 import pickler
 
 def string_or_bool( string, control):
+  pos = ['true', 'True', 'y', 'yes']
+  neg = ['false', 'False', 'n', 'no']
+  if (control.type == 'checkbox'):
+    result = ['on'] if string in pos else []
+    return result
   if (control.type == 'text'):
     print(string)
     return str(string)
-  pos = ['true', 'True', 'y', 'yes']
-  neg = ['false', 'False', 'n', 'no']
   if (string in pos) or (string in neg):
     return string in pos
   else:
@@ -24,7 +27,7 @@ def fill_form( br, argv ):
   br.form = list(br.forms())[0]
   
   for control in br.form.controls:
-    print("name=%s, type=%s" % (control.name, control.type))
+    print("name=%s, type=%s, value=%s" % (control.name, control.type, control.value))
     
 #   Set dynimg so we just get an image instd of a map
   control = br.form.find_control("dynimg")
