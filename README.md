@@ -14,10 +14,10 @@ Arguments:
 - -lo Specify longitude
 - -n Direction of lat (N/S)
 - -e Direction of lon (E/W)
-- -c Toggle equator
+- -co Toggle equator
 - -m Toggle moon and planets
 - -o Toggle constelation outlines
 - -cn Toggle constellation names
 - -is Set image size (in px)
-- -co Change image theme (1,2,3)
+- -sc Change image theme (1,2,3)
 Support for time coming in next commit.
