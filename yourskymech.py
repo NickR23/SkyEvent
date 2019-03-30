@@ -14,6 +14,7 @@ res = br.open('http://www.fourmilab.ch/cgi-bin/Yoursky')
 
 link = br.find_link("Customise")
 br.follow_link(link)
+  
 spinner.stop()
 
 #Fill out form
@@ -23,7 +24,7 @@ filler.fill_form( br, sys.argv )
 res = br.submit()
 
 #download generate img
-img = open('sky.jpg','wb')
+img = open('pic/sky.jpg','wb')
 img.write(requests.get(br.geturl()).content)
 img.close()
 
@@ -34,5 +35,5 @@ print(moon_dude)
 f.close()
 
 #display image
-img = Image.open('sky.jpg')
+img = Image.open('pic/sky.jpg')
 img.show()
