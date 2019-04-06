@@ -6,4 +6,4 @@ from template import SkyEvent
 root = Tk()
 root.title("SkyEvent")
 app = SkyEvent(root)
-root.mainloop()
+
