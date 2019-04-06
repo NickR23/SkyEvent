@@ -159,7 +159,8 @@ class SkyEvent:
 		stars_frame.pack()
 
 
-
+		submit_button=Button(mainframe,text='Submit')
+		submit_button.pack()
 		img = PhotoImage(file="./assets/happy_moon.png")
 		Label(image=img).pack()
 
