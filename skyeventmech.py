@@ -3,6 +3,7 @@ import form_filler as filler
 import mechanize as mech
 import requests
 from PIL import Image
+import urllib.request
 
 def get_moon_dude():
 	f = open('assets/title.txt', 'r')
@@ -10,9 +11,11 @@ def get_moon_dude():
 	f.close()
 	return moon_dude
 
+
 def main_process(argv):
 	spinner = Spinner() #Make spinner
 	spinner.start()
+	print('argv:',argv)
 
 	br = mech.Browser()
 	br.set_handle_robots(False)   # ignore robots
@@ -30,14 +33,13 @@ def main_process(argv):
 	res = br.submit()
 
 	#download generate img
-	img = open('pic/sky.jpg','wb')
+	img=open('pic/sky.jpg','wb')
 	img.write(requests.get(br.geturl()).content)
 	img.close()
 
 	#Show cool moon dude
-	moon_dude = get_moon_dude
+	moon_dude = get_moon_dude()
 	print(moon_dude)
-
 	#display image
 	img = Image.open('pic/sky.jpg')
 	img.show()

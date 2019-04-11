@@ -12,6 +12,12 @@ def get_location():
 	g = geocoder.ip('me')
 	return g.latlng
 
+def get_check_str_val(check_val):
+	if check_val == 1:
+		return "on"
+	else:
+		return 'off'
+
 class SkyEvent:
 	def __init__(self,master):
 		mainframe = Frame(master,padx=10,pady=10)
@@ -46,9 +52,9 @@ class SkyEvent:
 		self.latitude_entry.insert(0,current_location[0])
 		self.latitude_entry.pack(side=LEFT)
 		self.lat_dir=StringVar()
-		self.lat_dir.set("N")
-		latitude_radioN=Radiobutton(latitude_frame, text='North', variable=self.lat_dir, value='N').pack(side=LEFT)
-		latitude_radioS=Radiobutton(latitude_frame, text='South', variable=self.lat_dir, value='S').pack(side=LEFT)
+		self.lat_dir.set("North")
+		latitude_radioN=Radiobutton(latitude_frame, text='North', variable=self.lat_dir, value='North').pack(side=LEFT)
+		latitude_radioS=Radiobutton(latitude_frame, text='South', variable=self.lat_dir, value='South').pack(side=LEFT)
 
 		longitude_frame=Frame(location_frame)
 		longitude_frame.pack(anchor=W)
@@ -57,9 +63,9 @@ class SkyEvent:
 		self.longitude_entry.insert(0,current_location[1] * -1)
 		self.longitude_entry.pack(side=LEFT)
 		self.lon_dir=StringVar()
-		self.lon_dir.set("E")
-		longitude_radioE=Radiobutton(longitude_frame, text='East', variable=self.lon_dir, value='E').pack(side=LEFT)
-		longitude_radioW=Radiobutton(longitude_frame, text='West', variable=self.lon_dir, value='W').pack(side=LEFT)
+		self.lon_dir.set("East")
+		longitude_radioE=Radiobutton(longitude_frame, text='East', variable=self.lon_dir, value='East').pack(side=LEFT)
+		longitude_radioW=Radiobutton(longitude_frame, text='West', variable=self.lon_dir, value='West').pack(side=LEFT)
 
 		#Display
 		self.equator_check_val = IntVar()
@@ -110,6 +116,7 @@ class SkyEvent:
 		stars_mag_frame=Frame(stars_frame)
 		Label(stars_mag_frame,text='Show stars brighter than magnitude').pack(side=LEFT)
 		self.stars_magnitude=Entry(stars_mag_frame,width=3)
+		self.stars_magnitude.insert(0,'5.5')
 		self.stars_magnitude.pack(side=LEFT)
 		stars_mag_frame.pack(anchor=W)
 
@@ -118,6 +125,7 @@ class SkyEvent:
 		names_for_mag_check=Checkbutton(stars_mag_check_frame,text='Names for magnitude',variable=self.names_for_mag_check_val)
 		names_for_mag_check.pack(side=LEFT)
 		self.mag_check_entry=Entry(stars_mag_check_frame,width=3)
+		self.mag_check_entry.insert(0,'2.0')
 		self.mag_check_entry.pack(side=LEFT)
 		Label(stars_mag_check_frame,text='and brighter').pack(side=LEFT)
 		stars_mag_check_frame.pack(anchor=W)
@@ -127,6 +135,7 @@ class SkyEvent:
 		bayer_check=Checkbutton(stars_bayer_frame,text='Bayer/Flamsteed codes for magnitude',variable=self.bayer_check_val)
 		bayer_check.pack(side=LEFT)
 		self.bayer_entry=Entry(stars_bayer_frame,width=3)
+		self.bayer_entry.insert(0,'2.5')
 		self.bayer_entry.pack(side=LEFT)
 		bayer_append=Label(stars_bayer_frame,text='and brighter')
 		bayer_append.pack(side=LEFT)
@@ -139,6 +148,7 @@ class SkyEvent:
 		image_size_frame=Frame(stars_frame)
 		Label(image_size_frame,text='Image size:').pack(side=LEFT)
 		self.image_size_entry=Entry(image_size_frame,width=4)
+		self.image_size_entry.insert(0,'640')
 		self.image_size_entry.pack(side=LEFT)
 		Label(image_size_frame,text='pixels').pack(side=LEFT)
 		image_size_frame.pack(anchor=W)
@@ -146,6 +156,7 @@ class SkyEvent:
 		font_scale_frame=Frame(stars_frame)
 		Label(font_scale_frame,text='Font scale:').pack(side=LEFT)
 		self.font_scale_entry=Entry(font_scale_frame,width=3)
+		self.font_scale_entry.insert(0,'1.0')
 		self.font_scale_entry.pack(side=LEFT)
 		font_scale_frame.pack(anchor=W)
 
@@ -159,7 +170,7 @@ class SkyEvent:
 		stars_frame.pack()
 
 
-		submit_button=Button(mainframe,text='Submit')
+		submit_button=Button(mainframe,text='Submit',command=self.submit)
 		submit_button.pack()
 		img = PhotoImage(file="./assets/happy_moon.png")
 		Label(image=img).pack()
@@ -181,7 +192,51 @@ class SkyEvent:
 		current_location=get_location()
 		self.latitude_entry.delete(0,END)
 		self.latitude_entry.insert(0,current_location[0])
-		self.lat_dir.set('N')
+		self.lat_dir.set('North')
 		self.longitude_entry.delete(0,END)
 		self.longitude_entry.insert(0,current_location[1] * -1)
-		self.lon_dir.set('E')
+		self.lon_dir.set('East')
+
+	def submit(self):
+		#print('Submiting form')
+		argv=["gui.py"]
+		argv.extend(('-u',self.date_entry.get()))
+		argv.extend(('-la',self.latitude_entry.get()))
+		argv.extend(('-lo',self.longitude_entry.get()))
+		argv.extend(('-n',self.lat_dir.get()))
+		argv.extend(('-e',self.lon_dir.get()))
+		argv.extend(('-m',get_check_str_val(self.moon_and_planets_check_val.get())))
+		argv.extend(('-c',get_check_str_val(self.equator_check_val.get())))
+		argv.extend(('-dc',get_check_str_val(self.deep_sky_check_val.get())))
+		argv.extend(('-dv',self.deep_sky_entry.get()))
+		argv.extend(('-o',get_check_str_val(self.outline_check_val.get())))
+		argv.extend(('-cn',get_check_str_val(self.name_check_val.get())))
+		argv.extend(('-ca',get_check_str_val(self.horizon_check_val.get())))
+		argv.extend(('-cs',get_check_str_val(self.abbreviate_check_val.get())))
+		argv.extend(('-cb',get_check_str_val(self.boundaries_check_val.get())))
+		argv.extend(('-sm',self.stars_magnitude.get()))
+		argv.extend(('-sn',get_check_str_val(self.names_for_mag_check_val.get())))
+		argv.extend(('-snm',self.mag_check_entry.get()))
+		argv.extend(('-sb',get_check_str_val(self.bayer_check_val.get())))
+		argv.extend(('-sbm',self.bayer_entry.get()))
+		argv.extend(('-i',get_check_str_val(self.invert_check_val.get())))
+		argv.extend(('-is',self.image_size_entry.get()))
+		argv.extend(('-f',self.font_scale_entry.get()))
+
+		#Parse color scheme input
+		scheme = self.color_scheme_val.get()
+		parsed_scheme = ""
+		#print("scheme",scheme)
+		if scheme == "Color":
+			parsed_scheme = '0'
+		elif scheme == "Black on white":
+			parsed_scheme = '1'
+		elif scheme == "White on black":
+			parsed_scheme = '2'
+		else:
+			parsed_scheme = '3'
+		argv.extend(('-co',parsed_scheme))
+
+		#print(argv)
+		sem.main_process(argv)
+
