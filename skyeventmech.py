@@ -15,7 +15,6 @@ def get_moon_dude():
 def main_process(argv):
 	spinner = Spinner() #Make spinner
 	spinner.start()
-	print('argv:',argv)
 
 	br = mech.Browser()
 	br.set_handle_robots(False)   # ignore robots
@@ -39,6 +38,7 @@ def main_process(argv):
 
 	#Show cool moon dude
 	moon_dude = get_moon_dude()
+	print("~~~~~~~~~~~~~~~")
 	print(moon_dude)
 	#display image
 	img = Image.open('pic/sky.jpg')

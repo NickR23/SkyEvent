@@ -1,0 +1,22 @@
+{
+  "name": "skyevent",
+  "version": "1.0.0",
+  "description": "![sky](https://user-images.githubusercontent.com/29212540/54962596-d6fbc600-4f3b-11e9-9529-b099dd646df9.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickR23/SkyEvent.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickR23/SkyEvent/issues"
+  },
+  "homepage": "https://github.com/NickR23/SkyEvent#readme",
+  "dependencies": {
+    "twit": "^2.2.11"
+  }
+}
