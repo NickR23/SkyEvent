@@ -9,6 +9,7 @@ Uses Images, requests, and mechanize.
 
 ## Usage
 python3 yourskymech.py [ARGS]
+
 Arguments: 
 - -u Used before specifying date in year/month/day hour:minute:second format
 - -la Specify latitude
