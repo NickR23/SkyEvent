@@ -11,16 +11,15 @@ def load( name ):
 
 #maps to name and number of args expected in list
 dict = {
-  '-d':['date', 1 ],
   '-u':['utc', 2 ],
-  '-j':['jd', 1 ],
   '-la':['lat', 1], #Signifies lat lon input next
   '-lo':['lon', 1], #longitude
   '-n':['ns', 1 ], #Direction of lat
   '-e':['ew', 1], #Direction of lon
   '-c':['coords', 1], #On/Off ecliptic and equator
   '-m':['moonp', 1], #On/Off moon and planets
-  '-d':['deep', 2], #On/Off deep sky objects followed by magnitude value
+  '-dc':['deep', 1], #On/Off deep sky objects followed by magnitude value
+  '-dv':['deepm', 1],
   '-o':['consto', 1], #On/Off constellation outlines
   '-cn':['constn', 1], #OnOff constellation names
   '-ca':['consta', 1], #On/Off align names with horizon
