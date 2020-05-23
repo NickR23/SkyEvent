@@ -4,7 +4,7 @@
 Application that displays an image of the night sky based on longitude, latitude, and time.
 Currently runs exclusively from command line. 
 
-Utilizes this api for getting images. Please check it out!
+Utilizes this api by John Walker for getting images. Please check it out!
 (https://www.fourmilab.ch/yoursky/)
 
 ## Dependencies
