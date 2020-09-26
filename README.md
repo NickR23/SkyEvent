@@ -11,7 +11,7 @@ Utilizes this api by John Walker for getting images. Please check it out!
 Uses Images, requests, and mechanize.
 
 ## Usage
-python3 yourskymech.py [ARGS]
+python3 gui.py [ARGS]
 
 Arguments: 
 - -u Used before specifying date in year/month/day hour:minute:second format
